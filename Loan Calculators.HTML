@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Calculators</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+table, th, td {
+  border: 5px solid white;
+  border-collapse: collapse;
+  text-align: LEFT;
+}
+th, td {
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+}
+        .calculator-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .calculator {
+            background-image: linear-gradient(-225deg, #69EACB 0%, #EACCF8 48%, #6654F1 100%);
+            border-radius: 10px;
+            padding: 20px;
+            width: 30%;
+            min-width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .calculator h2 {
+            color: #0066cc;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .calculator label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .calculator input, .calculator select {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .calculator button {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .calculator button:hover {
+            background-color: #005bb5;
+        }
+        .output {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .output span {
+            display: block;
+            margin-top: 5px;
+        }
+        .eligible {
+            color: green;
+        }
+        .ineligible {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator-container">
+
+    <!-- Age-based Loan Eligibility Calculator -->
+    <div class="calculator" id="age-loan-calculator">
+        <h2>Age-based Loan Eligibility</h2>
+        <label for="dob">Enter Date of Birth:</label>
+        <input type="date" id="dob">
+
+        <button onclick="calculateAgeLoanEligibility()">Calculate</button>
+
+        <div class="output" id="ageLoanOutput"></div>
+
+<div class="calculator-container">
+    <h2 style="margin-bottom: 0.1px;">Loan Disbursement Calculator</h2>
+<table style="width:100%">
+<tbody>
+<tr><div class="input-group">
+        <td><label for="projectCost">Project Cost:</label>
+        <input type="number" id="projectCost" placeholder="Enter Project Cost" required></td>
+    </div>
+<div class="output-group">
+        <td><b><label>Margin:<br>₹</label>
+        <span id="margin"></span></b></td>
+    </div>
+</tr>
+<tr>
+    <div class="input-group">
+        <td><label for="loanAmount">Loan Amount:</label>
+        <input type="number" id="loanAmount" placeholder="Enter Loan Amount" required></td>
+    </div>
+<div class="output-group">
+        <td><b><label>Margin Percentage (%):</label>
+        <span id="marginPercentage"></span></b></td>
+        </div>
+</tr>
+<tr>
+    <div class="input-group">
+        <td><label for="disbursementToDate">Disbursement Till Date:</label>
+        <input type="number" id="disbursementToDate" placeholder="Enter Disbursement Till Date" required></td>
+    </div>
+<div class="output-group">
+        <td><b><label>Margin to be Paid Till Date:<br>₹</label>
+        <span id="marginUtilisedToDate"></span></b></td>
+      </div>
+</tr>
+<tr>
+    <div class="input-group">
+        <td><label for="marginPaidToDate">Margin Paid Till Date:</label>
+        <input type="number" id="marginPaidToDate" placeholder="Enter Margin Paid Till Date" required></td>
+    </div>
+<div class="output-group">
+        <td><b><label>Short Margin Till Date:<br>₹</label>
+        <span id="shortMarginToDate"></span></b></td>
+     </div>
+</tr>
+<tr>
+    <div class="input-group">
+        <td><label for="presentDisbursement">Present Disbursement Required:</label>
+        <input type="number" id="presentDisbursement" placeholder="Enter Present Disbursement Required" required></td>
+    </div>
+<div class="output-group">
+        <td><b><label>Margin to be Paid:<br>₹<b></label>
+        <span id="marginToBePaid"></span></td>
+    </div>
+<div class="output-group">
+        <td><b><label>Loan to be Disbursed:<br>₹</label>
+        <span id="loanToBeDisbursed"></span></b></td>
+    </div>
+</div>
+</tr>
+</tbody>
+</table> 
+<button class="button" onclick="calculateLoanDisbursement()">Calculate</button>
+    </div>
+</div>
+      <!-- EMI Calculator -->
+    <div class="calculator">
+    <h2>EMI Calculator</h2>
+    <label for="quantum">Loan Quantum (₹):</label>
+    <input type="number" id="quantum" required>
+
+    <label for="rateOfInterest">Rate of Interest (% per annum):</label>
+    <input type="number" id="rateOfInterest" step="0.01" required>
+
+    <label for="term">Loan Term (in months):</label>
+    <input type="number" id="term" required>
+
+    <label for="holiday">Repayment Holiday (in months):</label>
+    <input type="number" id="holiday" required>
+
+    <button onclick="calculateEMI()">Calculate EMI</button>
+
+    <div id="emiOutput" class="output"></div>
+
+<p align=center>Developed By: Rajdip Bose (118017)</p>
+  <p align=center><a href="mailto:rajdipbose@canarabank.com">rajdipbose@canarabank.com</a></p>
+</div>
+
+    <!-- Employment Type Calculator -->
+    <div class="calculator" id="employment-calculator">
+        <h2>Employment Type Calculator</h2>
+        <label for="employmentType">Select Employment Type:</label>
+        <select id="employmentType" onchange="showEmploymentFields()">
+            <option value="select">Select</option>
+            <option value="salaried">Salaried</option>
+            <option value="non-salaried">Non-Salaried</option>
+        </select>
+
+        <div id="salariedFields" style="display: none;">
+            <label>Enter Salary Details:</label>
+<table style="width:100%">
+<thead>
+<tr>   
+                    <th>Month</th>
+                    <th>Gross Salary</th>
+                    <th>Net Salary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+            <td>Month 1</td>
+            <td><input type="number" id="grossSalary1" placeholder="Month 1" min="0"></td>
+            <td><input type="number" id="netSalary1" placeholder="Month 1" min="0"></td>
+</tr>
+<tr>
+            <td>Month 2</td>
+            <td><input type="number" id="grossSalary2" placeholder="Month 2" min="0"></td>
+            <td><input type="number" id="netSalary2" placeholder="Month 2" min="0"></td>
+</tr>
+<tr>
+            <td>Month 3</td>
+            <td><input type="number" id="grossSalary3" placeholder="Month 3" min="0"></td>
+            <td><input type="number" id="netSalary3" placeholder="Month 3" min="0"></td>
+</tr>
+<tr>
+            <td>Month 4</td>
+            <td><input type="number" id="grossSalary4" placeholder="Month 4" min="0"></td>
+            <td><input type="number" id="netSalary4" placeholder="Month 4" min="0"></td>
+</tr>
+<tr>
+            <td>Month 5</td>
+            <td><input type="number" id="grossSalary5" placeholder="Month 5" min="0"></td>
+            <td><input type="number" id="netSalary5" placeholder="Month 5" min="0"></td>
+</tr>
+<tr>
+            <td>Month 6</td>
+            <td><input type="number" id="grossSalary6" placeholder="Month 6" min="0"></td>
+            <td><input type="number" id="netSalary6" placeholder="Month 6" min="0"></td>
+</tr>
+<tr>
+            <td>EMIs</td>
+            <td><label>Existing EMIs:</label><br>
+            <input type="number" id="existingEMIs" min="0"></td>
+            <td><label>Proposed EMI:</label><br>
+            <input type="number" id="proposedEMI" min="0"></td>
+</tr>
+</tbody>
+</table>
+        </div>
+
+        <div id="nonSalariedFields" style="display: none;">
+<label>Enter Income Details:</label>
+<table style="width:100%">
+<thead>
+<tr>   
+                    <th>Year</th>
+                    <th>Gross Income</th>
+                    <th>Net Income</th>
+</tr>
+</thead>
+<tbody>
+<tr>        
+            <td>Year 1</td>
+            <td><input type="number" id="grossIncome1" placeholder="Year 1" min="0"></td>
+            <td><input type="number" id="netIncome1" placeholder="Year 1" min="0"></td>
+</tr>
+<tr>
+                    <td>Year 2</td>
+                    <td><input type="number" id="grossIncome2" placeholder="Year 2" min="0"></td>
+                    <td><input type="number" id="netIncome2" placeholder="Year 2" min="0"></td>
+</tr>
+<tr>
+                    <td>Year 3</td>
+                    <td><input type="number" id="grossIncome3" placeholder="Year 3" min="0"></td>        
+                    <td><input type="number" id="netIncome3" placeholder="Year 3" min="0"></td>
+</tr>
+<tr>
+                    <td>EMIs</td>
+                    <td><label>Existing EMIs:</label><br>
+                    <input type="number" id="existingEMIsNonSalaried" min="0"></td>
+                    <td><label>Proposed EMI:</label><br>
+                    <input type="number" id="proposedEMINonSalaried" min="0"></td>
+</tr>
+</tbody>
+</table>  
+      </div>
+
+        <button onclick="calculateEmploymentType()">Calculate</button>
+
+        <div class="output" id="employmentOutput"></div>
+    </div>
+
+</div>
+
+<script>
+    // Age-based Loan Eligibility Calculation
+    function calculateAgeLoanEligibility() {
+        const dob = new Date(document.getElementById('dob').value);
+        const today = new Date();
+        let ageYears = today.getFullYear() - dob.getFullYear();
+        let ageMonths = today.getMonth() - dob.getMonth();
+
+        if (ageMonths < 0) {
+            ageYears--;
+            ageMonths += 12;
+        }
+
+        const ageDisplay = `${ageYears} years, ${ageMonths} months`;
+
+        let eligibleTermHousing = 0;
+        let eligibleTermMortgage = 120;
+        let eligibleTermVehicle = 84;
+
+        if (ageYears >= 18) {
+            if (ageYears < 75 || (ageYears === 74 && ageMonths === 0)) {
+                eligibleTermHousing = Math.min(360, (75 - ageYears) * 12 - ageMonths);
+            }
+            document.getElementById('ageLoanOutput').innerHTML = `
+<table style="width:100%">
+<tbody>
+<tr>
+                    <td>Age:</td>
+                    <td style="width: 90px;">${ageDisplay}</td>
+</tr>
+<tr>
+                    <td>Housing Loan Term:</td>
+                    <td><span class="${eligibleTermHousing > 0 ? 'eligible' : 'ineligible'}">${eligibleTermHousing > 0 ? eligibleTermHousing + ' months' : 'Ineligible'}</span></td>
+                    <td>Mortgage Loan Term:</td>
+                    <td><span class="eligible">${eligibleTermMortgage} months</span></td>  
+                    <td>Vehicle Loan Term:</td>
+                    <td><span class="eligible">${eligibleTermVehicle} months</span></td>
+</tr>
+</tbody>
+</table>
+            `;
+        } else {
+            document.getElementById('ageLoanOutput').innerHTML = `
+<table style="width:100%">
+<tbody>
+<tr>
+                <td>Age:</td>
+                <td>${ageDisplay}</td>
+                <td>Housing Loan Term:</td>
+                <td><span class="ineligible">Ineligible</span></td>
+                <td>Mortgage Loan Term:</td>
+                <td><span class="ineligible">Ineligible</span></td>
+                <td>Vehicle Loan Term:</td>
+                <td><span class="ineligible">Ineligible</span></td>
+</tr>
+</tbody>
+</table>
+            `;
+        }
+    }
+function calculateLoanDisbursement() {
+        let projectCost = parseFloat(document.getElementById('projectCost').value);
+        let loanAmount = parseFloat(document.getElementById('loanAmount').value);
+        let disbursementToDate = parseFloat(document.getElementById('disbursementToDate').value);
+        let marginPaidToDate = parseFloat(document.getElementById('marginPaidToDate').value);
+        let presentDisbursement = parseFloat(document.getElementById('presentDisbursement').value);
+
+        let margin = projectCost - loanAmount;
+        let marginPercentage = (margin / projectCost) * 100;
+        let marginUtilisedToDate = margin/loanAmount*disbursementToDate;
+        let shortMarginToDate = marginUtilisedToDate - marginPaidToDate;
+        let marginToBePaid = (marginPercentage / 100) * presentDisbursement + shortMarginToDate;
+        let loanToBeDisbursed = presentDisbursement-marginToBePaid;
+
+        document.getElementById('margin').innerText = margin.toFixed(0);
+        document.getElementById('marginPercentage').innerText = marginPercentage.toFixed(2);
+        document.getElementById('marginUtilisedToDate').innerText = marginUtilisedToDate.toFixed(0);
+        document.getElementById('shortMarginToDate').innerText = shortMarginToDate.toFixed(0);
+        document.getElementById('marginToBePaid').innerText = marginToBePaid.toFixed(0);
+        document.getElementById('loanToBeDisbursed').innerText = loanToBeDisbursed.toFixed(0);
+    }
+     // EMI Calculation
+
+    function calculateEMI() {
+        const quantum = parseFloat(document.getElementById('quantum').value);
+        const rateOfInterest = parseFloat(document.getElementById('rateOfInterest').value);
+        const term = parseInt(document.getElementById('term').value);
+        const holiday = parseInt(document.getElementById('holiday').value);
+
+        if (isNaN(quantum) || isNaN(rateOfInterest) || isNaN(term) || isNaN(holiday)) {
+            document.getElementById('emiOutput').innerHTML = `<span style="color: red;">Please enter valid numeric values for all fields.</span>`;
+            return;
+        }
+
+        const monthlyInterestRate = rateOfInterest / 100 / 12;
+        let newQuantum = quantum;
+        let interestDuringHoliday = 0;
+
+        if (holiday > 0) {
+            interestDuringHoliday = quantum * monthlyInterestRate * holiday / (1 - Math.pow(1 + monthlyInterestRate, -holiday));
+            newQuantum = quantum * Math.pow(1 + monthlyInterestRate, holiday);
+        }
+
+        let emi = 0;
+        const adjustedTerm = term - holiday;
+
+        if (adjustedTerm > 0) {
+            emi = (newQuantum * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, adjustedTerm)) /
+                  (Math.pow(1 + monthlyInterestRate, adjustedTerm) - 1);
+        }
+
+        const totalPayments = emi * adjustedTerm;
+        const totalInterest = totalPayments - quantum;
+        const repaymentStartDate = new Date();
+        repaymentStartDate.setMonth(repaymentStartDate.getMonth() + holiday+1);
+        const maturityDate = new Date(repaymentStartDate);
+        maturityDate.setMonth(maturityDate.getMonth() + adjustedTerm);
+
+        document.getElementById('emiOutput').innerHTML = `
+
+<table style="width:100%">
+<tbody>
+<tr>
+            <td>EMI:</td>
+            <td>₹${Math.round(emi)}</td>
+</tr>
+<tr>
+            <td>Number of Instalments:</td>
+            <td>${term-holiday}</td>
+</tr>
+<tr>
+            <td>Total Payment:</td>
+            <td>₹${Math.round(totalPayments)}</td>
+            <td>Total Interest Payment:</td>
+            <td>₹${Math.round(totalInterest)}</td>
+</tr>
+<tr>
+            <td>Repayment Start Date:</td>
+            <td>${repaymentStartDate.toDateString()}</td>
+            <td>Maturity Date:</td>
+            <td>${maturityDate.toDateString()}</td>
+</tr>
+</tbody>
+</table>
+        `;
+    }
+
+    // Show Employment Fields based on Selection
+    function showEmploymentFields() {
+        const employmentType = document.getElementById('employmentType').value;
+        document.getElementById('salariedFields').style.display = employmentType === 'salaried' ? 'block' : 'none';
+        document.getElementById('nonSalariedFields').style.display = employmentType === 'non-salaried' ? 'block' : 'none';
+    }
+
+    // Employment Type Calculation
+    function calculateEmploymentType() {
+        const employmentType = document.getElementById('employmentType').value;
+        let output = '';
+
+        if (employmentType === 'salaried') {
+            const grossSalaries = [
+                parseFloat(document.getElementById('grossSalary1').value),
+                parseFloat(document.getElementById('grossSalary2').value),
+                parseFloat(document.getElementById('grossSalary3').value),
+                parseFloat(document.getElementById('grossSalary4').value),
+                parseFloat(document.getElementById('grossSalary5').value),
+                parseFloat(document.getElementById('grossSalary6').value)
+            ];
+
+            const netSalaries = [
+                parseFloat(document.getElementById('netSalary1').value),
+                parseFloat(document.getElementById('netSalary2').value),
+                parseFloat(document.getElementById('netSalary3').value),
+                parseFloat(document.getElementById('netSalary4').value),
+                parseFloat(document.getElementById('netSalary5').value),
+                parseFloat(document.getElementById('netSalary6').value)
+            ];
+// Validation: Net salary should never be greater than gross salary
+        for (let i = 0; i < grossSalaries.length; i++) {
+            if (netSalaries[i] > grossSalaries[i]) {
+                document.getElementById('employmentOutput').innerHTML = `
+                    <span style="color: red;">Error: Net salary cannot be greater than gross salary. Kindly check and re-enter.</span>
+                `;
+                return; // Stop further execution
+            }
+        }
+            const existingEMIs = parseFloat(document.getElementById('existingEMIs').value);
+            const proposedEMI = parseFloat(document.getElementById('proposedEMI').value);
+
+            const avgGrossSalary = grossSalaries.reduce((a, b) => a + b, 0) / grossSalaries.length;
+            const avgNetSalary = netSalaries.reduce((a, b) => a + b, 0) / netSalaries.length;
+            const lastMonthGrossSalary = grossSalaries[5];
+            const lastMonthNetSalary = netSalaries[5];
+
+            const maxEligibleQuantumHousing = 72 * lastMonthGrossSalary;
+            const maxEligibleQuantumMortgage = 96 * lastMonthGrossSalary;
+            const minNTHHousing = Math.max(0.25 * lastMonthGrossSalary, 10000);
+            const minNTHMortgage = Math.max(0.35 * lastMonthGrossSalary, 30000);
+            const minNTHVehicle = Math.max(0.25 * lastMonthGrossSalary, 12000);
+            const totalEMI = existingEMIs + proposedEMI;
+            const NTH = lastMonthNetSalary - totalEMI;
+            const NTHPercent = (NTH / lastMonthGrossSalary) * 100;
+
+            output = `
+<table style="width:100%">
+<tbody>
+<tr>
+            <td>Average Gross Salary:</td>
+            <td>₹${Math.round(avgGrossSalary)}</td>
+            <td>Average Net Salary:</td>
+            <td>₹${Math.round(avgNetSalary)}</td>
+</tr>
+<tr>
+            <td>Max Eligible Quantum for Housing Loan<br>(72 times of last drawn gross salary):</td>
+            <td>₹${Math.round(maxEligibleQuantumHousing)}</td>
+            <td>Max Eligible Quantum for Mortgage Loan<br>(96 times of last drawn gross salary):</td>
+            <td>₹${Math.round(maxEligibleQuantumMortgage)}</td>
+</tr>
+<tr>
+            <td>Minimum NTH for Housing Loan<br>(25% of last drawn gross salary or ₹10000 whichever is higher):</td>
+            <td>₹${Math.round(minNTHHousing)}</td>
+            <td>Minimum NTH for Mortgage Loan<br>(35% of last drawn gross salary or ₹30000 whichever is higher):</td>
+            <td>₹${Math.round(minNTHMortgage)}</td>
+            <td>Minimum NTH for Vehicle Loan<br>(25% of last drawn gross salary or ₹12000 whichever is higher):</td>
+            <td>₹${Math.round(minNTHVehicle)}</td>
+</tr>
+<tr>
+            <td>Total EMI:</td>
+            <td>₹${Math.round(totalEMI)}</td>
+            <td>NTH:</td>
+            <td>₹${Math.round(NTH)}<br>${NTHPercent.toFixed(2)}%</td>
+</tr>
+</tr>
+</tbody>
+</table>
+            `;
+        } else if (employmentType === 'non-salaried') {
+            const grossIncomes = [
+                parseFloat(document.getElementById('grossIncome1').value),
+                parseFloat(document.getElementById('grossIncome2').value),
+                parseFloat(document.getElementById('grossIncome3').value)
+            ];
+
+            const netIncomes = [
+                parseFloat(document.getElementById('netIncome1').value),
+                parseFloat(document.getElementById('netIncome2').value),
+                parseFloat(document.getElementById('netIncome3').value)
+            ];
+
+              // Validation: Net income should never be greater than gross income
+        for (let i = 0; i < grossIncomes.length; i++) {
+            if (netIncomes[i] > grossIncomes[i]) {
+                document.getElementById('employmentOutput').innerHTML = `
+                    <span style="color: red;">Error: Net income cannot be greater than gross income. Kindly check and re-enter.</span>
+                `;
+                return; // Stop further execution
+            }
+        }
+            const existingEMIs = parseFloat(document.getElementById('existingEMIsNonSalaried').value);
+            const proposedEMI = parseFloat(document.getElementById('proposedEMINonSalaried').value);
+
+            const avgGrossIncome = grossIncomes.reduce((a, b) => a + b, 0) / grossIncomes.length;
+            const avgNetIncome = netIncomes.reduce((a, b) => a + b, 0) / netIncomes.length;
+            const lastYearGrossIncome = grossIncomes[2];
+            const lastYearNetIncome = netIncomes[2];
+
+            const avgMonthlyGrossIncome = avgGrossIncome / 12;
+            const avgMonthlyNetIncome = avgNetIncome / 12;
+            const grossMonthlyIncomeConsidered = Math.max(avgMonthlyGrossIncome, lastYearGrossIncome / 12);
+            const netMonthlyIncomeConsidered = Math.max(avgMonthlyNetIncome, lastYearNetIncome / 12);
+
+            const maxEligibleQuantumHousing = 6 * avgGrossIncome;
+            const maxEligibleQuantumMortgage = 8 * avgGrossIncome;
+            const minNTHHousing = Math.max(0.25 * grossMonthlyIncomeConsidered, 10000);
+            const minNTHMortgage = Math.max(0.35 * grossMonthlyIncomeConsidered, 30000);
+            const minNTHVehicle = Math.max(0.25 * grossMonthlyIncomeConsidered, 12000);
+            const totalEMI = existingEMIs + proposedEMI;
+            const NTH = netMonthlyIncomeConsidered - totalEMI;
+            const NTHPercent = (NTH / grossMonthlyIncomeConsidered) * 100;
+
+            output = `
+<table style="width:100%">
+<tbody>
+<tr>
+                <td>Average Gross Income:</td> 
+                <td>₹${Math.round(avgGrossIncome)}</td>
+                <td>Average Net Income:</td>
+                <td>₹${Math.round(avgNetIncome)}</td>
+</tr>
+<tr>
+               <td>Average Monthly Gross Income:</td>
+               <td>₹${Math.round(avgMonthlyGrossIncome)}</td>
+               <td>Average Monthly Net Income:</td>
+               <td>₹${Math.round(avgMonthlyNetIncome)}</td>
+</tr>
+<tr>
+               <td>Gross Monthly Income Considered:</td>
+               <td>₹${Math.round(grossMonthlyIncomeConsidered)}</td>
+               <td>Net Monthly Income Considered:</td>
+               <td>₹${Math.round(netMonthlyIncomeConsidered)}</td>
+</tr>
+<tr>           <td>Max Eligible Quantum for Housing Loan<br>(6 times of average gross income):</td>
+               <td>₹${Math.round(maxEligibleQuantumHousing)}</td>
+               <td>Max Eligible Quantum for Mortgage Loan<br>(8 times of average gross income):</td>
+               <td>₹${Math.round(maxEligibleQuantumMortgage)}</td>
+</tr>
+<tr>           <td>Minimum NTH for Housing Loan<br>(25% of considered gross monthly income or ₹10000 whichever is higher):</td>
+               <td>₹${Math.round(minNTHHousing)}</td>
+               <td>Minimum NTH for Mortgage Loan<br>(35% of considered gross monthly income or ₹30000 whichever is higher):</td>
+               <td>₹${Math.round(minNTHMortgage)}</td>
+               <td>Minimum NTH for Vehicle Loan<br>(25% of considered gross monthly income or ₹12000 whichever is higher):</td>
+               <td>₹${Math.round(minNTHVehicle)}</td>
+</tr>
+<tr>           <td>Total EMI:</td>
+               <td>₹${Math.round(totalEMI)}</td>
+               <td>NTH:</td>
+               <td>₹${Math.round(NTH)}<br>${NTHPercent.toFixed(2)}%</td>
+</tr>
+</tbody>
+</table>
+            `;
+        } else {
+            output = 'Please select an employment type and enter the required details.';
+        }
+
+        document.getElementById('employmentOutput').innerHTML = output;
+    }
+</script>
+</body>
+</html>
+
